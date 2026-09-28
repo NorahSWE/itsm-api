@@ -25,6 +25,7 @@ services:
       ENVIRONMENT: development
     volumes:
       - ./app:/code/app
+      - ./alembic:/code/alembic
     depends_on:
       db:
         condition: service_healthy
