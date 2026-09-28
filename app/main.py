@@ -1,20 +1,26 @@
 from fastapi import FastAPI
 
-from app.api.v1 import health
+from app.api.v1.router import api_router
 from app.core.config import settings
 
 tags_metadata = [
+    {"name": "Authentication", "description": "Register, login (JWT) and current-user endpoints."},
     {"name": "Health", "description": "Service and database health checks."},
 ]
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="RESTful API for IT Service Management: tickets, users, technicians, statuses and priorities.",
+    description=(
+        "RESTful API for IT Service Management: tickets, users, technicians, "
+        "statuses and priorities.\n\n"
+        "**To try protected endpoints:** register, then click **Authorize** and log in "
+        "(use your email as the username)."
+    ),
     openapi_tags=tags_metadata,
 )
 
-app.include_router(health.router, prefix="/api/v1")
+app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/", include_in_schema=False)
