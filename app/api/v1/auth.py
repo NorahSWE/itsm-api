@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app.api.deps import CurrentUser, DbSession
+from app.api.deps import DbSession
 from app.core.config import settings
 from app.core.security import create_access_token
 from app.schemas.token import Token
@@ -58,13 +58,3 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: DbSess
         access_token=create_access_token(user.id),
         expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
     )
-
-
-@router.get(
-    "/me",
-    response_model=UserRead,
-    summary="Get the current authenticated user",
-    responses={401: {"description": "Missing or invalid token"}},
-)
-def read_me(current_user: CurrentUser):
-    return current_user

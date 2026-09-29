@@ -4,7 +4,8 @@ from app.api.v1.router import api_router
 from app.core.config import settings
 
 tags_metadata = [
-    {"name": "Authentication", "description": "Register, login (JWT) and current-user endpoints."},
+    {"name": "Authentication", "description": "Register and login (JWT)."},
+    {"name": "Users", "description": "My profile, and user management for admins."},
     {"name": "Health", "description": "Service and database health checks."},
 ]
 

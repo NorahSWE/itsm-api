@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     PROJECT_NAME: str = "IT Service Management API"
-    VERSION: str = "0.3.0"
+    VERSION: str = "0.4.0"
     ENVIRONMENT: str = "development"  # development | production
     DEBUG: bool = False
 
